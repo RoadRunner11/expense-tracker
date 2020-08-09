@@ -5,12 +5,21 @@ from .forms import RegisterForm
 
 
 def register(request):
+    form = RegisterForm()
+    # print(form.as_p())
     if request.method == 'POST':
+        print(request.POST.get("sec-q"))#request.POST.get("last_name"),request.POST.get("first_name"), request.POST.get("username"), request.POST.get("password1"), request.POST.get("password2"),
+        # request.POST.get("email"))
         form = RegisterForm(request.POST)
         if form.is_valid():
+            print("hi")
             user = form.save()
             user.refresh_from_db()
-            user.profile.dob = form.cleaned_data.get('dob')
+            user.profile.dob = request.POST.get("dob")
+            user.profile.gender = request.POST.get("gender")
+            user.profile.phone_no = request.POST.get("txtEmpPhone")
+            user.profile.security_q = request.POST.get("sec-q")
+            user.profile.security_a = request.POST.get("answer")
             user.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)

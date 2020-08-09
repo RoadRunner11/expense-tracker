@@ -1,8 +1,110 @@
-{% block content %}
-  <h2>Register</h2>
+{% include 'tracker/base.html' %}
+{% block body %}
+  {% comment %} <h2>Register</h2>
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    <p><label for="id_username">Username:</label> 
+    <input type="text" name="username" maxlength="150" autofocus required id="id_username"> 
+    <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+    </p>
+    <p>
+    <label for="id_dob">Dob:</label> 
+    <input type="text" name="dob" required id="id_dob"> 
+    <span class="helptext">Required. Format: YYYY-MM-DD</span>
+    </p>
+    <p>
+    <label for="id_email">Email address:</label> 
+    <input type="email" name="email" maxlength="254" id="id_email">
+    </p>
+    <p>
+    <label for="id_password1">Password:</label>
+     <input type="password" name="password1" autocomplete="new-password" required id="id_password1">
+      <span class="helptext"><ul><li>Your password can’t be too similar to your other personal information.</li>
+      <li>Your password must contain at least 8 characters.</li><li>Your password can’t be a commonly used password.</li><li>Your password can’t be entirely numeric.</li></ul></span></p>
+    <p>
+    <label for="id_password2">Password confirmation:</label> 
+    <input type="password" name="password2" autocomplete="new-password" required id="id_password2">
+     <span class="helptext">Enter the same password as before, for verification.</span></p>
+
     <button type="submit">Sign up</button>
-  </form>
+  </form> {% endcomment %}
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container register">
+                <div class="row">
+                    <div class="col-md-3 register-left">
+                        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                        <h3>Welcome</h3>
+                        <p>You are 30 seconds away from keeping track your own money!</p>
+                        <input type="submit" name="" value="Login" onclick="window.location.href='{% url 'login'%}?next={{request.path}}'"/><br/>
+                    </div>
+                    <div class="col-md-9 register-right">
+                        
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <h3 class="register-heading">Register here</h3>
+                                <form method="post">
+                                {% csrf_token %}
+                                <div class="row register-form">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="First Name *" name="first_name" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Last Name *" name="last_name" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Username*" name="username" required id="id_username"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" placeholder="Password *" value="" name="password1" id="id_password1" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control"  placeholder="Confirm Password *" value="" name="password2" id="id_password2"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="maxl">
+                                                <label class="radio inline"> 
+                                                    <input type="radio" name="gender" value="M" checked>
+                                                    <span> Male </span> 
+                                                </label>
+                                                <label class="radio inline"> 
+                                                    <input type="radio" name="gender" value="F">
+                                                    <span>Female </span> 
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" placeholder="Your Email *" name="email" id="id_email" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Your Phone *" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="date" minlength="10" maxlength="0" name="dob" class="form-control" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-control" name="sec-q">
+                                                <option class="hidden"  selected disabled>Please select your Sequrity Question</option>
+                                                <option value="1">What is your Birthdate?</option>
+                                                <option value="2">What is Your old Phone Number</option>
+                                                <option value="3">What is your Pet Name?</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Enter Your Answer *" name="answer" value="" />
+                                        </div>
+                                        <input type="submit" class="btnRegister"  value="Register"/>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 {% endblock %}
